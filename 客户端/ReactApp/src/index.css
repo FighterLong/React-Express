@@ -1,0 +1,40 @@
+/* @import '~antd/dist/antd.css'; */
+/* 按需加载需要的ant design组件样式*/
+@import '~antd/lib/button/style/index.css';
+@import '~antd/lib/checkbox/style/index.css';
+@import '~antd/lib/input/style/index.css';
+@import '~antd/lib/icon/style/index.css';
+@import '~antd/lib/form/style/index.css';
+@import '~antd/lib/select/style/index.css';
+@import '~antd/lib/tooltip/style/index.css';
+@import '~antd/lib/cascader/style/index.css';
+@import '~antd/lib/message/style/index.css';
+@import '~antd/lib/layout/style/index.css';
+@import '~antd/lib/menu/style/index.css';
+@import '~antd/lib/breadcrumb/style/index.css';
+@import '~antd/lib/pagination/style/index.css';
+/* @import '~antd/lib/col/style/index.css'; */
+@import '~antd/lib/auto-complete/style/index.css';
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html,#root{
+  height: 100%;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+ul,li,h1,h2,p{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

@@ -1,0 +1,38 @@
+.article-list{
+    padding: 20px 0;
+}
+.article-item{
+    border-bottom: 2px dashed #aaa;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+.article-item-title{
+    font-weight: normal;
+    font-size: 23px;
+    color: #2e2e2e;
+    padding-bottom: 10px;
+    border-bottom:  1px solid #eee;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+.article-item-title:hover{
+    color: #49b1f5;
+    border-bottom-color: #49b1f5;
+}
+.article-item-tools{
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+.article-item-desc{
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+}
+.queryBtn{
+    color: #49b1f5;
+    cursor: pointer;
+}
+.queryBtn:hover{
+    text-decoration: underline
+}
