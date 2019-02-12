@@ -32,6 +32,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 根路径每次都会执行 那么意味着可以利用这点做一些请求拦截或者校验 例如：检查token
+app.use('/', function(req, res, next) {
+  console.log('看看请求是不是每次都执行了')
+  next()
+})
+
 app.use('/users', usersRouter);
 app.use('/public', publicRouter);
 app.use('/article', articleRouter);

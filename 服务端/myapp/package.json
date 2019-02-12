@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "pkg": "pkg . -t  node6-win-x64 -o app"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -15,6 +16,16 @@
     "md5-node": "^1.0.1",
     "morgan": "~1.9.0",
     "multer": "^1.4.1",
-    "mysql": "^2.16.0"
-  }
+    "mysql": "^2.16.0",
+    "pkg": "^4.3.7"
+  },
+  "bin": "./bin/www",
+  "pkg": {
+    "scripts": [
+      "public/**/*",
+      "views/*"
+    ]
+  },
+  "bundledDependencies": ["express"]
+
 }

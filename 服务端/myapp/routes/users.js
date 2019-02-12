@@ -1,6 +1,7 @@
 var MySQL = require('../mysql.js')
 var express = require('express');
 var Public = require('../public/javascripts/public')
+var token = require('../public/javascripts/token')
 var router = express.Router();
 /************************************* 登陆 *******************************************/
 router.get('/login', function(req, res, next) {
@@ -21,7 +22,11 @@ router.get('/login', function(req, res, next) {
       return
     }
     if (result && result.length) {
-      Public.tips(res, 200, result[0], '登陆成功')
+      // console.log(token.createToken(result[0]))
+      let data = {...result[0],token: token.createToken(result[0])}
+      // 注意登陆成功时  密码是不必要返回的
+      delete data.password
+      Public.tips(res, 200, data, '登陆成功')
     } else {
       Public.tips(res, 502, null, '账号密码不正确')
     }

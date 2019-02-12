@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 
+import PrivateRoute from './privateRoute'
 import Login from '../view/login/login.js'
 import Signin from '../view/signIn/signin.js'
 import Indexs from '../view/index/index.js'
@@ -15,7 +16,8 @@ export default class Routers extends Component {
             <Route exact path="/login" component={Login}/>
             <Route exact path="/" component={Indexs}/>
             <Route exact path="/signin" component={Signin}/>
-            <Route exact path="/ArticleOperation/:id" component={ArticleOperation}/>
+            <PrivateRoute path="/ArticleOperation/:id" component={ArticleOperation}></PrivateRoute>
+            {/* <Route exact path="/ArticleOperation/:id" component={ArticleOperation}/> */}
             <Route component={Errors}/>
           </Switch>
         </Router>
