@@ -22,6 +22,9 @@ class ArticleOperation extends Component {
     }
   }
   componentDidMount(){
+    if (this.props.match.params.id !== 'add') {
+      this.getArticleInfo(this.props.match.params.id)
+    }
     // 当页面渲染完之后渲染编辑器
     var editor = new Editor('#editor')
     // 把编辑器返回的对象记录下来
@@ -32,20 +35,50 @@ class ArticleOperation extends Component {
   }
   saveData = () => {
     this.setState({params: {...this.state.params, article_content: this.state.Editor.txt.html()}}, () => {
-      axios.post('/article/addArticle', this.state.params).then(res => {
-        if (res.code === 200) {
-          message.success('创建成功')
-          this.setState({params: {
-            article_title: '',
-            article_desc: '',
-            article_content: '',
-            article_type: 'react'
-          }})
-          this.state.Editor.txt.html('')
-        } else {
-          message.error(res.msg)
-        }
-      })
+      if (this.props.match.params.id === 'add') {
+        this.addArticle()
+      } else {
+        this.updateArticle()
+      }
+    })
+  }
+
+  // 新建文章
+  addArticle = () => {
+    axios.post('/article/addArticle', this.state.params).then(res => {
+      if (res.code === 200) {
+        message.success('创建成功')
+        this.setState({params: {
+          article_title: '',
+          article_desc: '',
+          article_content: '',
+          article_type: 'react'
+        }})
+        this.state.Editor.txt.html('')
+      } else {
+        message.error(res.msg)
+      }
+    })
+  }
+  // 编辑文章
+  updateArticle = () => {
+    axios.post('/article/updateArticle', this.state.params).then(res => {
+      if (res.code === 200) {
+        message.success('保存成功')
+      } else {
+        message.error(res.msg)
+      }
+    })
+  }
+
+  // 编辑时获取文章内容
+  getArticleInfo = (id) => {
+    axios.get('/article/getArticleMessage?id=' + id).then(res => {
+      if (res.code === 200) {
+        this.setState({params: {...res.data}}, () => {
+          this.state.Editor.txt.html(this.state.params.article_content)
+        })
+      }
     })
   }
   // 设置文章类型

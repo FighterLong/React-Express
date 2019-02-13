@@ -46,7 +46,11 @@ class Note extends Component {
     articleInform = (id) => {
         this.context.router.history.push('/ArticleMessage/' + id)
     }
-    
+    // 编辑文章
+    updateArticle = (id) => {
+        this.context.router.history.push('/ArticleOperation/' + id)
+    }
+    // 新建文章
     goAddArticle = () => {
         this.context.router.history.push('/ArticleOperation/add')
     }
@@ -56,10 +60,11 @@ class Note extends Component {
         this.state.list.forEach((item, index) => {
             articleElement.push((
                 <li className="article-item" key={index}>
-                    <h1 className="article-item-title" onClick={() => {this.articleInform(item.id)}}>{item.article_title}</h1>
+                    <h1 className="article-item-title" onClick={() => {this.articleInform(item.id)}}>{item.article_title} </h1>
                     <div className="article-item-tools">时间：{formatTime(item.create_time)} &nbsp;&nbsp;|&nbsp;&nbsp; 浏览量： {item.browse_num}</div>
                     <div className="article-item-desc">{item.article_desc}</div>
                     <span className="queryBtn" onClick={() => {this.articleInform(item.id)}}>查看详情</span>
+                    <span className="queryBtn" style={{marginLeft: '20px'}} onClick={() => {this.updateArticle(item.id)}}>编辑此文章</span>
                 </li>)
             )
         })

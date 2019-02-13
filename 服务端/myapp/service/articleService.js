@@ -102,8 +102,9 @@ var articleService = {
     },
     // 修改文章
     updateArticle(params) {
-      let updateSQL = 'UPDATE article SET article_title = ?,article_desc = ?,article_content = ?,article_type = ? WHERE Id = ? and uid = ?' 
-      let updateParams = [params.article_title,params.article_desc,params.article_content,params.article_type,params.id,params.uid]
+      let updateSQL = 'UPDATE article SET article_title = ?,article_desc = ?,article_content = ?,article_type = ? WHERE Id = ?' 
+    //   and uid = ? ,params.uid
+      let updateParams = [params.article_title,params.article_desc,params.article_content,params.article_type,params.id]
       return new Promise(function(resolve,reject) {
         MySQL.query(updateSQL,updateParams,function(err, result){
           if (err) {
