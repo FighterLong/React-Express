@@ -1,0 +1,26 @@
+.article_message{
+    width: 70%;
+    padding: 26px;
+    margin: 0 auto;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.article_title{
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+.article_date{
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+}
+.article_content{
+    /* width: 80%; */
+    margin: 0 auto;
+    /* background */
+    /* border: 1px solid #ccc;
+    padding: 26px;
+    border-radius: 5px; */
+}

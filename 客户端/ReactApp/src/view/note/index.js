@@ -30,6 +30,7 @@ class Note extends Component {
     componentDidMount() {
         this.getArticle()
     }
+    // 获取所有文章
     getArticle = () => {
         axios.get('/article/getAllArticle', {
             params: this.state.params
@@ -41,6 +42,10 @@ class Note extends Component {
             }
         })
     }
+    // 查看文章详情
+    articleInform = (id) => {
+        this.context.router.history.push('/ArticleMessage/' + id)
+    }
     
     goAddArticle = () => {
         this.context.router.history.push('/ArticleOperation/add')
@@ -51,10 +56,10 @@ class Note extends Component {
         this.state.list.forEach((item, index) => {
             articleElement.push((
                 <li className="article-item" key={index}>
-                    <h1 className="article-item-title">{item.article_title}</h1>
+                    <h1 className="article-item-title" onClick={() => {this.articleInform(item.id)}}>{item.article_title}</h1>
                     <div className="article-item-tools">时间：{formatTime(item.create_time)} &nbsp;&nbsp;|&nbsp;&nbsp; 浏览量： {item.browse_num}</div>
                     <div className="article-item-desc">{item.article_desc}</div>
-                    <span className="queryBtn">查看详情</span>
+                    <span className="queryBtn" onClick={() => {this.articleInform(item.id)}}>查看详情</span>
                 </li>)
             )
         })

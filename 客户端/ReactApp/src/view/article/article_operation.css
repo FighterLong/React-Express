@@ -9,7 +9,25 @@
 .article_operation{
   width: 1000px;
   margin: 0 auto;
+  /* margin: 0 auto;
   padding-top: 30px;
+  padding: 26px; */
+  /* box-sizing: border-box; */
+  /* min-height: 100%;
+  background: rgba(255,255,255,0.65);
+  border-radius: 10px; */
+}
+.article_box{
+    /* width: 100%;
+    padding: 26px;
+    box-sizing: border-box;
+    min-height: 100%;
+    background: rgba(255,255,255,0.65);
+    border-radius: 10px; */
+    /* opacity: 0.7; */
+}
+.article_operation .article_box{
+  box-sizing: inherit;
 }
 .article_operation-top{
   display: flex;

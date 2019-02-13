@@ -74,36 +74,38 @@ class ArticleOperation extends Component {
     }
     const plainOptions = this.state.navList;
     return <div className="article_operation">
-        <div className="article_operation-top">
-          <Button onClick={this.goIndex}>返回首页</Button>
-          <Button type="primary" onClick={this.saveData}>保存</Button>
-        </div>
-        <Form.Item
-          {...formItemLayout}
-          label='文章标题'
-        >
-          <Input name="article_title" value={this.state.params.article_title} onChange={this.setTextData}></Input>
-        </Form.Item>
-        <Form.Item
-          {...formItemLayout}
-          label='文章简介'
-        >
-          <TextArea rows={4} value={this.state.params.article_desc}  name="article_desc" onChange={this.setTextData}></TextArea>
-        </Form.Item>
-        <Form.Item
-          {...formItemLayout}
-          label='文章类型'
-        > 
-          <RadioGroup options={plainOptions} value={this.state.params.article_type} onChange={this.setArticleType}/>
-        </Form.Item>
-        <Form.Item
-          {...formItemLayout}
-          label='文章内容'
-        >
-          <div className="editor-box">
-              <div id="editor"></div>
+          <div className="article_box">
+            <div className="article_operation-top">
+              <Button onClick={this.goIndex}>返回首页</Button>
+              <Button type="primary" onClick={this.saveData}>保存</Button>
+            </div>
+            <Form.Item
+              {...formItemLayout}
+              label='文章标题'
+            >
+              <Input name="article_title" value={this.state.params.article_title} onChange={this.setTextData}></Input>
+            </Form.Item>
+            <Form.Item
+              {...formItemLayout}
+              label='文章简介'
+            >
+              <TextArea rows={4} value={this.state.params.article_desc}  name="article_desc" onChange={this.setTextData}></TextArea>
+            </Form.Item>
+            <Form.Item
+              {...formItemLayout}
+              label='文章类型'
+            > 
+              <RadioGroup options={plainOptions} value={this.state.params.article_type} onChange={this.setArticleType}/>
+            </Form.Item>
+            <Form.Item
+              {...formItemLayout}
+              label='文章内容'
+            >
+              <div className="editor-box">
+                  <div id="editor"></div>
+              </div>
+            </Form.Item>
           </div>
-        </Form.Item>
     </div>
   }
 }

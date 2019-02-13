@@ -6,7 +6,6 @@ var articleService = require('../service/articleService')
 
 /* 添加文章 */
 router.post('/addArticle', function(req, res, next) {
-  res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'})
   let params = req.body
   if(!params.article_title || !params.article_desc || !params.article_content || !params.article_type) {
     Public.tips(res, 501, null, '请完善信息')
@@ -46,7 +45,7 @@ router.post('/delArticle', function (req, res, next) {
   if (params.ids.indexOf('[') !== -1) {
     params.ids = params.ids.slice(params.ids.indexOf('[') + 1, params.ids.indexOf(']'))
   }
-  articleService.delArticle(params).then(res => {
+  articleService.delArticle(params).then(result => {
     Public.tips(res, 200, null, '删除成功')
   }).catch(err => {
     Public.tips(res, 500, null, '删除失败')
@@ -60,7 +59,7 @@ router.get('/getMyArticle', function (req, res, next) {
     Public.tips(res, 500, null, '请先登陆')
     return
   }
-  articleService.getMyArticle(params).then(res => {
+  articleService.getMyArticle(params).then(result => {
     Public.tips(res, 200, result, '成功')
   }).catch(err => {
     Public.tips(res, 500, null, '获取失败')
@@ -70,11 +69,11 @@ router.get('/getMyArticle', function (req, res, next) {
 /** 通过文章ID获取详细信息 */
 router.get('/getArticleMessage', function (req, res, next) {
   let params = req.query
-  if (params.id) {
+  if (!params.id) {
     Public.tips(res, 500, null, '请选择你要获取的文章')
     return
   }
-  articleService.getArticleMessage(params).then(res => {
+  articleService.getArticleMessage(params).then(result => {
     Public.tips(res, 200, result, '成功')
   }).catch(err => {
     Public.tips(res, 500, null, '获取失败')
@@ -83,7 +82,7 @@ router.get('/getArticleMessage', function (req, res, next) {
 /** 编辑文章 */
 router.post('/updateArticle', function (req, res, next) {
   let params = req.body
-  if (!params.article_id) {
+  if (!params.id) {
     Public.tips(res, 501, null, '未找到此文章')
     return
   }
@@ -91,6 +90,13 @@ router.post('/updateArticle', function (req, res, next) {
     Public.tips(res, 501, null, '请完善信息')
     return
   }
+  // はい、そうです。
+  articleService.updateArticle(params).then(result => {
+    Public.tips(res, 200, null, '保存成功')
+  }).catch(err => {
+    Public.tips(res, 500, null, '保存时发生错误，请联系管理员') 
+    // Public.tips(res, 500, null, '保存時にエラーが発生しましたので、管理者に連絡してください')
+  })
 })
 
 module.exports = router;

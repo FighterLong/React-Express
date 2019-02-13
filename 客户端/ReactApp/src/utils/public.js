@@ -1,6 +1,6 @@
 export default function formatTime(val) {
     if (!val) {
-       return ''
+       return '无'
     }
     let d = new Date(val)
     let year = d.getFullYear()

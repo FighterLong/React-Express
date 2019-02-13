@@ -14,6 +14,7 @@ var app = express();
 app.all('*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', req.headers.origin)
   res.header("Access-Control-Allow-Headers", "Content-Type")
+  res.header("Content-Type", "application/json; charset=utf-8")
   res.header('Access-Control-Allow-Credentials', 'true')
   if (req.method === 'OPTIONS') {
     res.send(200)
@@ -34,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // 根路径每次都会执行 那么意味着可以利用这点做一些请求拦截或者校验 例如：检查token
 app.use('/', function(req, res, next) {
-  console.log('看看请求是不是每次都执行了')
+  // console.log('看看请求是不是每次都执行了')
   next()
 })
 
