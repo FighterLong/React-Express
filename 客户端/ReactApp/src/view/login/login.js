@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { message } from 'antd';
 import axios from '../../api/index'
 import LoginForm from './module/loginForm.js'
 import logo from '../../logo.svg';
 import './login.css'
 export default class Login extends Component{
+  static contextTypes = {
+      router: PropTypes.object.isRequired,
+  }
   login = (data) => {
     axios.get('/users/login', {
        params: {
@@ -14,6 +18,7 @@ export default class Login extends Component{
     }).then(res => {
       if (res.code === 200) {
         message.success('登陆成功')
+        this.context.router.history.push('/')
       } else {
         message.error(res.msg)
       }

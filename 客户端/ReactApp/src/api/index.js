@@ -1,7 +1,7 @@
 import axios from 'axios'
 // 创建axios实例
 const ajx = axios.create({
-  baseURL: 'http://localhost:3366',
+  baseURL: 'http://192.168.30.50:3366',
   timeout: 1000 * 20,
   withCredentials: true
 })
