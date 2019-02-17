@@ -46,22 +46,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 let privateRoute = ['/article/addArticle', '/article/delArticle', '/article/getMyArticle', '/article/updateArticle']
 
 
-// 根路径每次都会执行 那么意味着可以利用这点做一些请求拦截或者校验 例如：检查token
+// 全局中间件，每次都会执行 那么意味着可以利用这点做一些请求拦截或者校验 例如：检查token
 app.use(function(req, res, next) {
   if (privateRoute.includes(req.path)) {
+    console.log('接收的TOKEN:' + req.cookies.TOKEN)
     TOKEN.checkToken(req.cookies.TOKEN, () => {
       console.log('私有路由，token有效')
       next()
     }, () => {
       console.log('token无效，请登陆')
       res.status(200);
-      res.end(JSON.stringify({code: 502, data: null, msg: '请登陆'}))
+      res.end(JSON.stringify({code: 101, data: null, msg: '请登陆'}))
     })
   } else {
     next()
   }
 })
 
+// 挂载路由
 app.use('/users', usersRouter);
 app.use('/public', publicRouter);
 app.use('/article', articleRouter);

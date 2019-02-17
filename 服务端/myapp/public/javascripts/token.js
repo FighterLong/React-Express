@@ -26,7 +26,7 @@ var token={
     },
     decodeToken:function(token){
         if (!token) {
-            return
+            return ''
         }
         var decArr=token.split(".");
         if(decArr.length<2){

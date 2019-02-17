@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Menu, Icon, Input, Pagination, message, Button } from 'antd';
+import { Layout, Menu, Icon, Input, Pagination, message, Button, Radio } from 'antd';
 import axios from '../../api/index'
 import formatTime from '../../utils/public'
+import defaultImg from '../../common/image/articleDefault.jpg'
 import './index.css'
+
+const RadioGroup = Radio.Group;
 const { SubMenu } = Menu;
 const { Content, Sider, } = Layout;
 const Search = Input.Search;
@@ -12,6 +15,7 @@ class Note extends Component {
         router: PropTypes.object.isRequired,
     }
     state = {
+        showItemType: 'image',
         params: {
             keyword: '',
             type: 'react',
@@ -54,8 +58,15 @@ class Note extends Component {
     goAddArticle = () => {
         this.context.router.history.push('/ArticleOperation/add')
     }
+    // 切换文章列表显示方式
+    changeShowItem = (e) => {
+        this.setState({
+            showItemType: e.target.value,
+        });
+    }
 
     render() {
+        let articleCard = []
         let articleElement = []
         this.state.list.forEach((item, index) => {
             articleElement.push((
@@ -67,6 +78,23 @@ class Note extends Component {
                     <span className="queryBtn" style={{marginLeft: '20px'}} onClick={() => {this.updateArticle(item.id)}}>编辑此文章</span>
                 </li>)
             )
+            
+            articleCard.push(
+                <li className="article-card">
+                    <div className="imgBox">
+                        <img src={defaultImg} alt="" />
+                        <h1 className="article-card-title">
+                            <span>
+                                {item.article_title}
+                            </span>
+                        </h1>
+                    </div>
+                    <div className="article-card-desc">
+                        {item.article_desc}
+                    </div>
+                </li>
+            )
+
         })
         let pageParams = {
           defaultCurrent: 1,
@@ -110,9 +138,22 @@ class Note extends Component {
                     style={{ width: 250 }}
                 />
                 <Button type="primary" style={{float: 'right'}} onClick={this.goAddArticle}>新建文章</Button>
+                
+                <RadioGroup style={{float: 'right'}} onChange={this.changeShowItem} value={this.state.showItemType}>
+                    <Radio value={'text'}>文字列表</Radio>
+                    <Radio value={'image'}>图文列表</Radio>
+                </RadioGroup>
+                
+                {this.state.showItemType === 'image' ?
+                // 卡片形式
+                <ul className="article-card-list">
+                    {articleCard}
+                </ul> :
+                // 列表形式
                 <ul className="article-list">
                     {articleElement}
                 </ul>
+                }
                 {noneElement}
             </Content>
         </Layout>)

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {  Input, Button, Form, Radio, message } from 'antd';
+import { Template } from '../../component/template'
 import axios from '../../api/index'
 import './article_operation.css'
 const RadioGroup = Radio.Group;
@@ -62,6 +63,7 @@ class ArticleOperation extends Component {
   }
   // 编辑文章
   updateArticle = () => {
+    console.log(document.cookie)
     axios.post('/article/updateArticle', this.state.params).then(res => {
       if (res.code === 200) {
         message.success('保存成功')
@@ -106,7 +108,9 @@ class ArticleOperation extends Component {
       },
     }
     const plainOptions = this.state.navList;
-    return <div className="article_operation">
+    return(
+      <Template>
+       <div className="article_operation">
           <div className="article_box">
             <div className="article_operation-top">
               <Button onClick={this.goIndex}>返回首页</Button>
@@ -139,7 +143,7 @@ class ArticleOperation extends Component {
               </div>
             </Form.Item>
           </div>
-    </div>
+  </div> </Template> )
   }
 }
 export default ArticleOperation

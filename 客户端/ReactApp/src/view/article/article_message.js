@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { message } from 'antd';
 import axios from '../../api/index'
 import formatTime from '../../utils/public'
+import { Template } from '../../component/template'
 import './article_message.css'
 export default class ArticleMessage extends Component{
   static contextTypes = {
@@ -32,12 +33,17 @@ export default class ArticleMessage extends Component{
     })
   }
   render () {
-    return (<div className="article_message">
-       <div className="article_box">
-        <h1 className="article_title">{this.state.params.article_title}</h1>
-        <div className="article_date">类型： {this.state.params.article_type} &nbsp;&nbsp; 时间： {formatTime(this.state.params.create_time)} &nbsp;&nbsp; 浏览量： {this.state.params.browse_num}</div>
-        <div className="article_content" dangerouslySetInnerHTML={{__html: this.state.params.article_content}}></div>
-       </div>
-    </div>)
+    return (
+      
+    <Template>
+      <div className="article_message">
+        <div className="article_box">
+          <h1 className="article_title">{this.state.params.article_title}</h1>
+          <div className="article_date">类型： {this.state.params.article_type} &nbsp;&nbsp; 时间： {formatTime(this.state.params.create_time)} &nbsp;&nbsp; 浏览量： {this.state.params.browse_num}</div>
+          <div className="article_content" dangerouslySetInnerHTML={{__html: this.state.params.article_content}}></div>
+        </div>
+      </div>
+    </Template>
+    )
   }
 }

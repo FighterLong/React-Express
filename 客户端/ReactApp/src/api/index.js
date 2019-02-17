@@ -15,6 +15,10 @@ ajx.interceptors.request.use(config => {
 
 // response拦截器
 ajx.interceptors.response.use(response => {
+  if (response.data && response.data.code === 101) {
+    window.location.href = window.location.origin + '/#/login'
+    return response.data
+  }
   if (response.data) {
     return response.data
   }
