@@ -1,13 +1,13 @@
 var MySQL = require('../mysql.js')
-var express = require('express');
+var express = require('express')
 var Public = require('../public/javascripts/public')
 var TOKEN = require('../public/javascripts/token')
-var router = express.Router();
-/************************************* 登陆 *******************************************/
-router.get('/login', function(req, res, next) {
+var router = express.Router()
+/** *********************************** 登陆 *******************************************/
+router.get('/login', function (req, res, next) {
   // res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'})
   let query = req.query
-  for(var name in query) {
+  for (var name in query) {
     if ((name === 'username' || name === 'password') && !query[name]) {
       Public.tips(res, 501, null, '账号密码为必填项')
       return
@@ -15,7 +15,7 @@ router.get('/login', function(req, res, next) {
   }
   // escape方法 用来防止node-mysql中的sql注入
   let sql = 'select * from userdata where username=? and password=?'
-  var sqlParams = [query.username,query.password]
+  var sqlParams = [query.username, query.password]
   MySQL.query(sql, sqlParams, (error, result) => {
     if (error) {
       console.log('err' + error)
@@ -26,8 +26,8 @@ router.get('/login', function(req, res, next) {
       delete result[0].password
 
       // 登陆成功时将token设置到客户端的cookie中  有效期至3天
-      res.cookie('TOKEN', TOKEN.createToken(result[0]), {expires:  new Date(Date.now() + (3 * 60 * 60 * 24))})
-      
+      res.cookie('TOKEN', TOKEN.createToken(result[0]), {expires: new Date(Date.now() + (3 * 60 * 60 * 24))})
+
       // console.log(token.createToken(result[0]))
       let data = result[0]
 
@@ -36,10 +36,10 @@ router.get('/login', function(req, res, next) {
       Public.tips(res, 502, null, '账号密码不正确')
     }
   })
-});
+})
 
-function setUser (res,params) {
-  for(var name in params) {
+function setUser (res, params) {
+  for (var name in params) {
     if ((name === 'username' || name === 'password' || name === 'email' || name === 'phone') && !params[name]) {
       Public.tips(res, 501, null, '请完善信息')
       return
@@ -56,16 +56,16 @@ function setUser (res,params) {
     Public.tips(res, 200, null, '注册成功')
   })
 }
-/************************************* 注册 *******************************************/
-router.post('/signin', function(req, res, next) {
+/** *********************************** 注册 *******************************************/
+router.post('/signin', function (req, res, next) {
   res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'})
   let params = req.body
   let querySQL = `select * from userdata where username=?`
   var querySQLParams = [params.username]
   // MySQL.escape()
-  MySQL.query(querySQL,querySQLParams, (err, result) => {
+  MySQL.query(querySQL, querySQLParams, (err, result) => {
     if (err) {
-      console.log('err:'+err)
+      console.log('err:' + err)
       return
     }
     if (result && result.length) {
@@ -74,5 +74,5 @@ router.post('/signin', function(req, res, next) {
       setUser(res, params)
     }
   })
-});
-module.exports = router;
+})
+module.exports = router

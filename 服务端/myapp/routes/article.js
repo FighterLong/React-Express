@@ -1,33 +1,33 @@
-var MySQL = require('../mysql.js')
-var express = require('express');
+// var MySQL = require('../mysql.js')
+var express = require('express')
 var Public = require('../public/javascripts/public')
-var router = express.Router();
+var router = express.Router()
 var articleService = require('../service/articleService')
 
 /* 添加文章 */
-router.post('/addArticle', function(req, res, next) {
+router.post('/addArticle', function (req, res, next) {
   let params = req.body
-  if(!params.article_title || !params.article_desc || !params.article_content || !params.article_type) {
+  if (!params.article_title || !params.article_desc || !params.article_content || !params.article_type) {
     Public.tips(res, 501, null, '请完善信息')
     return
   }
   articleService.addArticle(params).then(result => {
-    Public.tips(res, 200, null, '新建成功') 
-  }).catch(err => {
+    Public.tips(res, 200, null, '新建成功')
+  }).catch(() => {
     Public.tips(res, 500, null, '新建失败，请联系管理员')
   })
 })
 /** 获取所有文章  模糊查询 分页 筛选 */
-router.get('/getAllArticle', function(req, res, next) {
-  res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'})
+router.get('/getAllArticle', function (req, res, next) {
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' })
   let params = req.query
-  if(!params.pageIndex || !params.type || !params.pageSize) {
+  if (!params.pageIndex || !params.type || !params.pageSize) {
     Public.tips(res, 501, null, '缺少参数')
     return
   }
   articleService.getAllArticle(params).then(result => {
     Public.tips(res, 200, result, '成功')
-  }).catch(err => {
+  }).catch(() => {
     Public.tips(res, 500, null, '获取失败')
   })
 })
@@ -47,7 +47,7 @@ router.post('/delArticle', function (req, res, next) {
   }
   articleService.delArticle(params).then(result => {
     Public.tips(res, 200, null, '删除成功')
-  }).catch(err => {
+  }).catch(() => {
     Public.tips(res, 500, null, '删除失败')
   })
 })
@@ -61,7 +61,7 @@ router.get('/getMyArticle', function (req, res, next) {
   }
   articleService.getMyArticle(params).then(result => {
     Public.tips(res, 200, result, '成功')
-  }).catch(err => {
+  }).catch(() => {
     Public.tips(res, 500, null, '获取失败')
   })
 })
@@ -75,7 +75,7 @@ router.get('/getArticleMessage', function (req, res, next) {
   }
   articleService.getArticleMessage(params).then(result => {
     Public.tips(res, 200, result, '成功')
-  }).catch(err => {
+  }).catch(() => {
     Public.tips(res, 500, null, '获取失败')
   })
 })
@@ -86,17 +86,17 @@ router.post('/updateArticle', function (req, res, next) {
     Public.tips(res, 501, null, '未找到此文章')
     return
   }
-  if(!params.article_title || !params.article_desc || !params.article_content || !params.article_type) {
+  if (!params.article_title || !params.article_desc || !params.article_content || !params.article_type) {
     Public.tips(res, 501, null, '请完善信息')
     return
   }
   // はい、そうです。
   articleService.updateArticle(params).then(result => {
     Public.tips(res, 200, null, '保存成功')
-  }).catch(err => {
-    Public.tips(res, 500, null, '保存时发生错误，请联系管理员') 
+  }).catch(() => {
+    Public.tips(res, 500, null, '保存时发生错误，请联系管理员')
     // Public.tips(res, 500, null, '保存時にエラーが発生しましたので、管理者に連絡してください')
   })
 })
 
-module.exports = router;
+module.exports = router

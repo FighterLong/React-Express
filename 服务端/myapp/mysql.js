@@ -1,14 +1,14 @@
-var express = require('express')
-var qs = require('querystring')
+// var express = require('express')
+// var qs = require('querystring')
 var mysql = require('mysql')
 var connection = mysql.createConnection({
-  host: 'localhost',// 主机名
-  port: 3306,// 端口
-  database: 'expressbasedb',// 数据库名称
+  host: 'localhost', // 主机名
+  port: 3306, // 端口
+  database: 'expressbasedb', // 数据库名称
   user: 'root',
   password: 'root'
 })
-connection.connect(function(err) {
+connection.connect(function (err) {
   if (err) {
     console.log('数据库连接失败：' + err)
   }
