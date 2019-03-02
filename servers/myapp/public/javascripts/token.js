@@ -23,7 +23,7 @@ var token = {
     console.log('生成touken了')
     return base64Str + '.' + signature
   },
-  decodeToken: function (token) {
+  decodeToken: function (token) { // 检查token是否有效
     if (!token) {
       return ''
     }
@@ -53,7 +53,7 @@ var token = {
       checkSignature: checkSignature
     }
   },
-  checkToken: function (token, success, errorFunction) {
+  checkToken: function (token, success, errorFunction) { // 检查token 主要是检查redis中是否存在
     var resDecode = this.decodeToken(token)
     if (!resDecode) {
       // reject()
