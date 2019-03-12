@@ -44,7 +44,7 @@ module.exports = appInfo => {
     },
   };
 
-
+  // egg-multipart 注意要设置文件白名单
   config.multipart = {
     fileExtensions: [ '.doc' ],
   };
@@ -85,10 +85,6 @@ module.exports = appInfo => {
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
-    multipart: {
-      fileSize: '20M',
-    },
-
   };
 
   return {
