@@ -22,3 +22,9 @@ exports.swaggerdoc = {
   enable: true,
   package: 'egg-swagger-doc',
 };
+// swagger
+exports.multipart = {
+  enable: true,
+  package: 'egg-multipart',
+};
+

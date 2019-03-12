@@ -12,4 +12,5 @@ module.exports = app => {
   router.get('/user/login', controller.user.userLogin);
   router.post('/user/signin', controller.user.signinUser);
   router.get('/article/getAllArticle', controller.article.getAll);
+  router.post('/file/uploadFile', controller.upload.index);
 };

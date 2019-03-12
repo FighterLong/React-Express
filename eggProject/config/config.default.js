@@ -44,6 +44,11 @@ module.exports = appInfo => {
     },
   };
 
+
+  config.multipart = {
+    fileExtensions: [ '.doc' ],
+  };
+
   // swagger配置
   config.swagger = {
     dirScanner: './app/controller',
@@ -80,6 +85,10 @@ module.exports = appInfo => {
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
+    multipart: {
+      fileSize: '20M',
+    },
+
   };
 
   return {
