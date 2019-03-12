@@ -11,4 +11,5 @@ module.exports = app => {
   router.get('/user/getAll', checkToken, controller.user.getAll);
   router.get('/user/login', controller.user.userLogin);
   router.post('/user/signin', controller.user.signinUser);
+  router.get('/article/getAllArticle', controller.article.getAll);
 };
