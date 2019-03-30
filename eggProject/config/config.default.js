@@ -44,6 +44,7 @@ module.exports = appInfo => {
     },
   };
 
+
   // egg-multipart 注意要设置文件白名单
   config.multipart = {
     fileExtensions: [ '.doc' ],

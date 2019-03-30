@@ -1,0 +1,58 @@
+.layout {
+  height 100%
+  &__logo {
+    height: 32px;
+    background: rgba(255,255,255,.2);
+    margin: 16px;
+  }
+  &__trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color .3s;
+    &:hover {
+      color: #1890ff;
+    }
+  }
+}
+
+.head {
+  &__admin {
+    float right
+    margin-right: 16px;
+    line-height: 64px;
+    cursor pointer
+    &:hover {
+      // color: 
+    }
+    &-img {
+      width 40px;
+      height 40px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+  }
+}
+// 全局加载的loadding
+.loadding_Model {
+  position: fixed
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  background: rgba(0,0,0,0.3)
+  z-index: 1060
+  .loading_icon{
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    margin: auto
+    color: #40a9ff
+    width: 23px
+    height: 23px
+    font-size: 28px
+  }
+}

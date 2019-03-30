@@ -19,12 +19,10 @@ class UploadController extends Controller {
     const ctx = this.ctx;
     // egg-multipart 已经帮我们处理文件二进制对象
     const stream = await ctx.getFileStream();
-    console.log(stream);
     // 新建一个文件名
     const filename = md5(stream.filename) + Date.now() + path
       .extname(stream.filename)
       .toLocaleLowerCase();
-    console.log(filename);
     // 文件生成绝对路径
     const target = path.join(this.config.baseDir, 'app/public/uploads', filename);
     // 生成一个文件写入 文件流

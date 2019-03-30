@@ -21,7 +21,16 @@ class ArticleController extends Controller {
       ctx.response.body = { code: 500, msg: '缺少必填参数', data: null };
     }
     const result = await this.ctx.service.articleService.getAll(query);
-    this.ctx.body = result;
+    ctx.response.body = { code: 200, msg: '查询成功', data: result };
+  }
+  async getArticleMessage() {
+    const { ctx } = this;
+    const query = ctx.request.query;
+    if (!query.id) {
+      ctx.response.body = { code: 500, msg: '未找到此文章', data: null };
+    }
+    const result = await this.ctx.service.articleService.getArticleMessage(query);
+    ctx.response.body = { code: 200, msg: '查询成功', data: result };
   }
 }
 module.exports = ArticleController;
